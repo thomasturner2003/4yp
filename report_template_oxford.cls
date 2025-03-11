@@ -64,3 +64,10 @@
     \thispagestyle{empty} % Suppress page number on the title page
 \end{titlepage}
 }
+
+% ADD ACRONYMS HERE
+\newacronym{3yp}{3YP}{Third-Year Project}
+\newacronym{cpp}{CPP}{Coverage Path Planning}
+
+% ADD ADDITIONAL PACKAGES HERE
+\usepackage{algpseudocode}
