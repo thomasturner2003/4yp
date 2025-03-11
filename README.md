@@ -10,3 +10,4 @@ Go to Menu on Overleaf and change the field `compiler`.
 - Use \include{{section}.tex} to add new tex documents.
 - When you add new sections, make sure to add \fancyhead[C]{Name} above it.
 - When you add new sections, try to add \label{section} so that others can reference your section. 
+- Add new bibliographies to biblio.bib under your own name.
