@@ -34,6 +34,8 @@
 \usepackage{glossaries}
 \makeglossaries
 
+\newcommand{\subtitle}[1]{\def\@subtitle{#1}} 
+
 \renewcommand{\maketitle}{
 \begin{titlepage}
     \centering
@@ -44,20 +46,20 @@
     \vspace*{1cm}
 
     \Huge
-    \textbf{Title of Your Document}
+    \textbf{\@title}
 
     \vspace{0.5cm}
     \LARGE
-    Subtitle or Additional Information
+    \@subtitle
 
     \vfill
 
     \vspace{1.5cm}
 
-    \textbf{Author Name}
+    \textbf{\@author}
 
     \Large
-    Date
+    \@date
 
     \thispagestyle{empty} % Suppress page number on the title page
 \end{titlepage}
