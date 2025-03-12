@@ -72,3 +72,4 @@
 
 % ADD ADDITIONAL PACKAGES HERE
 \usepackage{algpseudocode}
+\usepackage{hyperref}
