@@ -64,3 +64,16 @@
     \thispagestyle{empty} % Suppress page number on the title page
 \end{titlepage}
 }
+
+\usepackage{setspace}
+\usepackage{multicol}
+
+\newcommand{\printbibliography}[2]{
+\begingroup\onehalfspacing
+{\small
+\begin{multicols}{2}
+\bibliographystyle{plain}
+\bibliography{#1}
+\end{multicols}}
+\endgroup
+}
