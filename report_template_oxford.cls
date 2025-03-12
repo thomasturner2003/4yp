@@ -41,7 +41,7 @@
     \centering
     \vspace*{1cm}
 
-    \includegraphics[width=0.4\textwidth]{figs/oxford_logo.png}
+    \includegraphics[width=0.4\textwidth]{figs/ox_eng_logo.pdf}
 
     \vspace*{1cm}
 
