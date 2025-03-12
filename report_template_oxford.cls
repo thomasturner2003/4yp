@@ -68,6 +68,7 @@
 % ADD ACRONYMS HERE
 \newacronym{3yp}{3YP}{Third-Year Project}
 \newacronym{cpp}{CPP}{Coverage Path Planning}
+\newacronym{gpr}{GPR}{Ground Penetrating Radar}
 
 % ADD ADDITIONAL PACKAGES HERE
 \usepackage{algpseudocode}
