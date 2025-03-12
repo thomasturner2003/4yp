@@ -1,0 +1,48 @@
+\subsection{Thermal Simulations}
+
+This is the thermal simulations subsection
+
+\subsubsection{Governing Equations}
+Unsteady Heat Equation
+
+The general form of the 3D unsteady heat equation in Cartesian coordinates is:
+
+\begin{equation}
+    c_p \rho \frac{\partial T}{\partial t} = 
+    \frac{\partial}{\partial x} \left( k \frac{\partial T}{\partial x} \right) + 
+    \frac{\partial}{\partial y} \left( k \frac{\partial T}{\partial y} \right) + 
+    \frac{\partial}{\partial z} \left( k \frac{\partial T}{\partial z} \right)
+\end{equation}
+
+
+where:
+\begin{itemize}
+    \item \( T(x,y,z,t) \) is the temperature field,
+    \item \( k(x,y,z,t) \) is the thermal conductivity,
+    \item \( \rho(x,y,z,t) \) is the mass density,
+    \item \( c_p (x,y,z,t) \) is the specific heat capacity.
+    
+\end{itemize}
+
+For piecewise constant properties $\rho, k, c_p$ this can be written as
+
+\begin{equation}
+    \frac{\partial T}{\partial t} = \alpha \left( \frac{\partial^2 T}{\partial x^2} + \frac{\partial^2 T}{\partial y^2} + \frac{\partial^2 T}{\partial z^2} \right)
+\end{equation}
+
+which can be compactly written as
+
+\begin{equation}
+    \frac{\partial T}{\partial t} = \alpha \nabla^2 T
+\end{equation}
+
+
+
+Where \( \alpha(x,y,z,t) := \frac{k}{\rho c_p}\) is the thermal diffusivity.
+
+
+\subsection{Solar Insolation}
+\subsection{Emmision}
+\subsection{Convection}
+
+\subsection{Boundary Conditions}
