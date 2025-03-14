@@ -65,9 +65,23 @@
 \end{titlepage}
 }
 
+\usepackage{setspace}
+\usepackage{multicol}
+
+\newcommand{\printbibliography}[2]{
+\begingroup\onehalfspacing
+{\small
+\begin{multicols}{2}
+\bibliographystyle{plain}
+\bibliography{#1}
+\end{multicols}}
+\endgroup
+}
+
 % ADD ACRONYMS HERE
 \newacronym{3yp}{3YP}{Third-Year Project}
 \newacronym{cpp}{CPP}{Coverage Path Planning}
+\newacronym{tspo}{TSP-O}{Travelling Salesman Problem with Obstacles}
 \newacronym{gpr}{GPR}{Ground Penetrating Radar}
 
 % ADD ADDITIONAL PACKAGES HERE
