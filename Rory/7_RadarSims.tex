@@ -1,23 +1,24 @@
 \subsection{Radar Simulations} \label{compvis_radarsims}
 
     \subsubsection{Introduction and Physical Principles} \label{rory_radar_principles}
+    
         As outlined in Section \ref{simulation_justification}, the limited diversity of the radar dataset necessitates physics-driven simulations to replicate the noise and clutter encountered in real-world environments. These simulations aim to validate the CNN’s robustness to physical processes that degrade B-scan clarity, ensuring reliable performance under operational conditions.
     
-    The electromagnetic phenomena governing radar losses are:
-    \begin{itemize}
-    
-        \item \textbf{Antenna losses}: Mismatch losses (approximately −1 dB \cite{daniels2005gpr}), and efficiency losses (excluded as secondary to subsurface effects).
+        The electromagnetic phenomena governing radar losses are:
+        \begin{itemize}
         
-        \item \textbf{Transmission losses}: Signal attenuation from reflections at air-soil and soil-air interfaces.
+            \item \textbf{Antenna losses}: Mismatch losses (approximately −1 dB \cite{daniels2005gpr}), and efficiency losses (excluded as secondary to subsurface effects).
+            
+            \item \textbf{Transmission losses}: Signal attenuation from reflections at air-soil and soil-air interfaces.
+            
+            \item \textbf{Material losses}: Frequency-dependent attenuation within heterogeneous soils.
+            
+            \item \textbf{Scattering losses}: Arising from subsurface inhomogeneities in soil composition, and soil surface roughness.
         
-        \item \textbf{Material losses}: Frequency-dependent attenuation within heterogeneous soils.
+        \end{itemize}
         
-        \item \textbf{Scattering losses}: Arising from subsurface inhomogeneities in soil composition, and soil surface roughness.
-    
-    \end{itemize}
-    
-    To model these effects, finite-difference time-domain (FDTD) simulations were conducted using \textit{gprMax} \cite{warren2016gprmax}, an open-source framework for solving Maxwell’s equations in 3D geophysical media. This approach captures full-wave electromagnetic behaviour, including wave propagation, reflection, and attenuation, while explicitly accounting for soil heterogeneity. The inclusion of surface roughness is not considered in this report, as for the purposes of validating the CNN-driven detection framework, modelling of subsurface heterogeneity suffices to ensure robustness to clutter. This is however a significant contribution to the clutter observed in an operational GPSAR system, and future work should consider this aspect that has been overlooked here.
- 
+        To model these effects, finite-difference time-domain (FDTD) simulations were conducted using \textit{gprMax} \cite{warren2016gprmax}, an open-source framework for solving Maxwell’s equations in 3D geophysical media. This approach captures full-wave electromagnetic behaviour, including wave propagation, reflection, and attenuation, while explicitly accounting for soil heterogeneity. The inclusion of surface roughness is not considered in this report, as for the purposes of validating the CNN-driven detection framework, modelling of subsurface heterogeneity suffices to ensure robustness to clutter. This is however a significant contribution to the clutter observed in an operational GPSAR system, and future work should consider this aspect that has been overlooked here.
+     
     
     
     \subsubsection{gprMax Implementation}
@@ -38,9 +39,6 @@
     
         A realistic simulation of electromagnetic wave propagation necessitates an accurate representation of the subsurface. In this work, the heterogeneous soil is modelled using the Peplinski model \cite{dummyRef4}, which characterises soil dielectric properties based on sand fraction, clay fraction, bulk density, sand-particle density and volumetric water fraction range. To capture the natural spatial variability, a fractal generation technique is employed \cite{dummyRef5}. This method replicates the self-similar patterns observed in natural soils over multiple scales, thereby enhancing the fidelity of the simulation by accounting for the inherent heterogeneity in the subsurface.
     
-
-
-    
         \begin{figure}[htbp]
             \centering
             \includegraphics[width=0.8\textwidth]{figs/Rory/radar_domain.pdf}
@@ -48,9 +46,6 @@
             \label{fig:radar_domain}
         \end{figure}
         \footnote{\url{https://www.paraview.org/}}
-    
-    
-    
     
     \subsubsection{Results and Validation}
     
