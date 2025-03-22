@@ -1,0 +1,16 @@
+\subsection{Overview of Fusion} \label{fusion_overview}
+
+    We have shown in \ref{compvis_radarcv} and \ref{compvis_thermalcv} that we can generate bounding boxes highlighting suspected mines for both the radar Bscans and thermal images respectively. In this analysis, we will treat the predictions by the CNNs at a probability distribution, where anywhere not in a bounding box is implicitly zero probability, and regions in bounding boxes have probability equal to the associated confidence score provided by the CNN.
+    
+    As mentioned in \ref{compvis_methods}, we fuse the probability distributions over each image by performing an affine transformation, and using the position and orientation metadata associated with each image, forming an Orthomosaic. DETAIL OF THE ALGO? REASONING FOR THIS? GPS DENIED? 
+    
+    Now we have two probability distributions that have arisen from different sensors but have support over the same geographical space, and the question is how can we intelligently combine these to get a most-informed prediction.
+    
+    
+    We note the implicit fusion mentioned in \ref{compvis_methods}, for sake of time-saving, the radar sensor only scans points of high probability on the thermal probability map. The only way we can have a true negative system prediction (with rate $TN_{sys}$) is if: Thermal correctly identifies it as negative (with probability $S_t$), or the thermal sensor wrongly flags it (with probability $(1-S_t)$) but the radar sensor correctly rejects it (with probability $S_r$)
+    
+    Comparison with Naive Bayes; Because the ANFIS fusion system was shown to have improved precision and recall than Naive Bayes \ref{compvis_anfisvalid}, we can say that the performance metrics for Naive Bayes (which is easier to analyse) will be a lower bound on the precision metrics for the ANFIS fusion system on average. This can be though of as follows: ANFIS has access to physically relevant contextual information, and is constrained to physical solutions, where Naive Bayes does not. Thus we would expect ANFIS to provide better precision and recall than Naive bayes, which is indeed validated in \ref{compvis_anfisvalid}.
+    
+    \subsubsection{Loss Matrix} \label{lossmatrix}
+        
+        It is clearly worse for the user if the system has many false negatives than many false positives, to some extent. At some point the number of false positives becomes overwhelming, and the demining operation becomes too expensive and laborious. If the false negative rate is too high, then it is likely that someone is going to get injured or killed, because a region that has been marked as 'safe' in fact has a landmine in it.

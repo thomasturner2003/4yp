@@ -1,0 +1,50 @@
+\subsection{Fusion System Performance Bounds} \label{fusion_bounds}
+
+    \subsubsection*{Notation}
+        
+        Let:
+        \begin{itemize}
+            \item \(\rho_0\) be the initial density of mines in the field, i.e. the fraction of all points that are true mines.
+            \item \(R_T\) be the recall of the thermal sensor, i.e. the probability that a mine is flagged when present.
+            \item \(F_T\) be the false positive rate of the thermal sensor, i.e. the probability that a non-mine is flagged.
+        \end{itemize}
+        
+        The thermal sensor defines a candidate region \(\mathcal{T}^+\) where it deems mines likely. Within \(\mathcal{T}^+\), the effective mine density, \(\rho_1\), is given exactly by
+        \[
+        \rho_1 = \frac{R_T\,\rho_0}{R_T\,\rho_0 + F_T\,(1-\rho_0)}.
+        \]
+        This follows from noting that the number of true positives (per unit area) is \(R_T\,\rho_0\) while the number of false positives is \(F_T\,(1-\rho_0)\).
+    
+    \subsubsection*{Lower Bound on Fused Precision}
+    
+        After the thermal sensor stage, the radar sensor is applied only to \(\mathcal{T}^+\). In the worst-case scenario, suppose that the radar sensor and subsequent fusion add no extra discriminative power, so that the final decision is entirely determined by the thermal sensor’s candidate set. Then, the final system precision \(P_F\) (i.e. the probability that a candidate flagged as a mine is indeed a mine) cannot be lower than the candidate density \(\rho_1\). Thus, we obtain the explicit lower bound:
+        \[
+        P_F \ge \rho_1 = \frac{R_T\,\rho_0}{R_T\,\rho_0 + F_T\,(1-\rho_0)}.
+        \]
+        In other words, even if the radar sensor provides no additional filtering, the fused system will have a precision of at least \(\rho_1\).
+        \subsection*{Upper Bound on Fused Precision}
+        Let the radar sensor, when operating on the candidate set, have an intrinsic precision \(P_R\). By definition,
+        \[
+        P_R = \frac{R_R\,\rho_1}{R_R\,\rho_1 + F_R\,(1-\rho_1)},
+        \]
+        where \(R_R\) and \(F_R\) denote the recall and false positive rate of the radar sensor on \(\mathcal{T}^+\), respectively. Since the fusion method (here, implemented via ANFIS with physical rules) cannot produce a fused precision higher than the best that the radar sensor can provide on its inputs, we obtain the upper bound
+        \[
+        P_F \le P_R.
+        \]
+    
+    \subsubsection*{Summary of Bounds}
+    
+        Thus, the overall fused system precision satisfies
+        \[
+        \frac{R_T\,\rho_0}{R_T\,\rho_0 + F_T\,(1-\rho_0)} \le P_F \le \frac{R_R\,\rho_1}{R_R\,\rho_1 + F_R\,(1-\rho_1)}.
+        \]
+        
+    \subsubsection*{Numerical Example and Discussion}
+    
+        For instance, suppose that the initial mine density is \(\rho_0 = 0.1\), the thermal sensor has a recall \(R_T = 0.8\), and a false positive rate \(F_T = 0.4\). Then the candidate region density is
+        \[
+        \rho_1 = \frac{0.8 \times 0.1}{0.8 \times 0.1 + 0.4 \times 0.9} 
+        = \frac{0.08}{0.08 + 0.36} 
+        = \frac{0.08}{0.44} \approx 0.182.
+        \]
+        Thus, the overall fused system precision is bounded by \(P_F \ge 0.182\). In practice, since the radar sensor and the fusion method (ANFIS with physical rules) are designed to further refine the candidate set, the actual precision will be higher than this lower bound. To maximise overall recall while ensuring acceptable precision, the system is tuned to favour the thermal sensor’s recall (i.e. a high \(R_T\)) even at the expense of a higher \(F_T\), because false negatives are heavily penalised. The radar stage then acts to reduce false positives. This approach, which leverages the benefits of both sensors, is key to the system’s robust performance.
