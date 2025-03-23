@@ -1,4 +1,5 @@
 \subsection{Design Considerations}
+
 \subsubsection{Modularity}
 \paragraph{Relevance}
 Modularity improves the longevity and usability of the \gls{UAV}. This is because it allows for components to be easily replaced with either a working unit of the same kind in repairs, an upgraded unit or a unit tuned for specific mission requirements, regulations or operating conditions. Mechanical modularity is the most obvious path as the components need to physically connect easily however, the communication architecture also needs to support this so that devices can easily communicate even if they are changed completely.
@@ -11,8 +12,21 @@ There are two key failure modes for the battery: State of Charge and thermal run
 \paragraph{\gls{ESC} Telemetry}
 \gls{ESC}s traditionally did not provide telemetry data and instead failures are detected using \gls{IMU} data. However, relying on noisy inertial sensor data is far worse than if you use telemetry. This is because, it cannot be as precise in locating the issue or precise in quantifying it. They are also not subject to random variations including wind. The telemetry provided by the \gls{ESC} includes voltage, current and \gls{RPM}. This is incredibly important information when classifying motor and propeller faults accurately.  
 
+\subsubsection{Redundancy}
+\paragraph{Relevance}
+Reducing communication failures requires redundant components as a single failure should not cause the communication system to break. This means that where possible, the system should be able to tolerate the failure of a single node.
+\paragraph{Distributed Networks}
+If a node itself cannot be a redundant it should be able to communicate on at least two different lines. 
+\paragraph{Distributed Networks}
+If a node itself cannot be a redundant it should be able to communicate on at least two different lines. 
+
 \subsection{Devices}
 \subsubsection{Safety Critical Devices}
+\paragraph{Relevance}
+Safety critical devices ensure that the drone does not crash. This therefore consists of the components in the drone that keep it flying, including the: flight controller, battery, electronic speed controllers, and, the motors. It also includes: location sensing,  collision detection and altimetry as these all prevent the drone from crashing or landing somewhere it is difficult to retrieve.
+\paragraph{Risk mitigation through distribution}
+Distributing the devices on different communication lines reduces the risk of failure as it reduces the risk of common mode failure from a single node. For example, if a GNSS module where to have an improper fixture and move in a way that it severs all connections if both communication lines are in it, both are severed and crashing is inevitable, however, if only one communication line is on it the other communication line is undamaged. This means distributing the devices is a key risk mitigation strategy.
+
 \subsubsection{Required Connections}
 \subsubsection{Layout}
 
