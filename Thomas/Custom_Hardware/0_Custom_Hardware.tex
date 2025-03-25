@@ -3,8 +3,11 @@
 \section{Custom Hardware} \label{section:Custom Hardware}
 
 \subsection{Introduction and Philosophy}
+\paragraph{When to use custom components}
+\gls{COTS} options should always be considered before any custom part as if there is something that already meets the design requirements it is often the better choice. This is because you do not need to invest the design and development time into making a new device and the current manufacturer benefits from greater economies of scale. However, often when choosing \gls{COTS} options they can cause compromises to cost and specification that make custom hardware appropriate.
 \paragraph{Philosophy}
-All hardware should be easy and quick to debug even by unskilled ground operators, it should support redundancy in both sensors and in communications. They should also line up with our sustainability objectives by ensuring all components are \gls{RoHS} compliant.
+All hardware should be easy and quick to debug even by unskilled ground operators, it should support redundancy in both sensors and in communications. They should also line up with our sustainability objectives by ensuring all components are \gls{RoHS} compliant and our modularity objectives by having clear and easy interfaces.
+
 
 \input{Thomas/Custom_Hardware/1_Flight_Controller}
 \input{Thomas/Custom_Hardware/2_GNSS_Module}

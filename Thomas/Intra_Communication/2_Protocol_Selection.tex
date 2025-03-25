@@ -75,8 +75,17 @@ As \gls{IMU}s provide key data for control and location sensing they should be u
 \paragraph{\gls{GNSS}}
 \gls{GNSS} modules can communicate with \gls{UART} or \gls{I$^2$C}, both are simple and effective however, \gls{UART} is compatible with more modules and is therefore chosen.
 
-\paragraph{MicroSD card}
-MicroSD cards can communicate with \gls{SPI} or \gls{SDIO} as native. \gls{SDIO} is the native application and is faster and more effective, however, given the limited data transfer rates required and benefit of using \gls{SPI} over multiple devices and that on the selected \gls{MCU} a \gls{SWD} pin is also required for \gls{SDIO} means that using \gls{SPI} provided more benefit.
+\paragraph{Flight Controller MicroSD card}
+MicroSD cards can communicate with \gls{SPI} or \gls{SDIO} as native. \gls{SDIO} is the native application and is faster and more effective, however, given the limited data transfer rates required and benefit of using \gls{SPI} over multiple devices and that on the selected \gls{MCU} a \gls{SWD} pin is also required for \gls{SDIO} means that using \gls{SPI} provided more benefit for the flight controller as the data transfer rates are well bellow the \textbf{SPI data limit}.
+
+\paragraph{On Board Computer SD card}
+As the data transfer rates are higher \gls{SDIO} becomes a required option as it can handle \textbf{a shittone of kilobytes} and we need \textbf{a shittone of kilobytes} which is over the \textbf{SPI data limit}.
+
+\paragraph{\gls{LiDAR} Sensors}
+\textbf{NEED specs from Huirui}
+
+\paragraph{Imaging sensors}
+The imaging sensors require high data transfer rates \textbf{quote the one for thermal and for GPR}, this means connecting them via Ethernet to the onboard computer with a maximum threshold of \textbf{Some number} would be most appropriate.
 
 \paragraph{Low Speed Sensors}
 Low speed sensors including any thermometers, barometers do not require high frequency 
