@@ -67,3 +67,63 @@ As the antenna is moved across the ground, successive measurements are combined 
     \caption{Examples of UAV platforms integrating GPR systems for landmine detection.~\cite{garcia2022safedrone,cerquera2017uav}}
     \label{fig:gpr_uav_examples}
 \end{figure}
+
+\paragraph{Spectral and Thermal Imaging Approaches}
+
+Spectral and thermal imaging techniques detect anomalies in the electromagnetic radiation reflected or emitted from the Earth's surface. These methods aim to identify visual or thermal patterns associated with landmines or disturbed soil above them. The three primary sensor modalities in this class include visible-spectrum (optical) imaging, thermal infrared (IR) imaging, and hyperspectral or multispectral imaging.
+
+\textbf{Optical cameras} operate in the visible light range and capture color or grayscale images of the terrain. They are primarily used to identify surface-laid landmines or areas with disturbed soil resulting from recent burial. These systems rely on texture and shape contrast, and their effectiveness depends on unobstructed ground visibility and minimal vegetation~\cite{cardonalandmine}.
+
+\textbf{Thermal infrared imaging} detects differences in heat emissions between landmines and surrounding soil. Due to variations in thermal conductivity and heat capacity, mines retain or release heat at different rates, producing temperature contrasts that can be sensed with thermal cameras. These contrasts may arise from volume effects (influences on subsurface heat flow) or surface effects (soil disturbance from burial). Thermal infrared imaging is most effective during diurnal transitions, such as early morning or late evening~\cite{Bruschini1997ASO,paik2002image,source18}.
+
+\textbf{Hyperspectral and multispectral imaging} collect data across many discrete spectral bands, spanning the visible, near-infrared, and shortwave infrared regions. These sensors are used to detect subtle changes in soil composition, vegetation stress, or camouflage indicative of buried mines~\cite{robledo2009survey,alqudsi2021review}.
+
+\textbf{Strengths:} All three imaging modalities are non-contact, passive, and lightweight, making them suitable for drone integration. They can scan large areas rapidly and are effective for detecting surface-laid or shallowly buried landmines under appropriate conditions. Optical imaging is particularly advantageous due to its low cost and simplicity. Thermal imaging excels in identifying subsurface anomalies caused by heat transfer, enabling detection of mines with limited surface visibility. Hyperspectral and multispectral systems provide detailed material and spectral information, enabling detection of subtle disturbances in the terrain or vegetation. These sensors are often used in conjunction with machine learning models to enhance detection accuracy.
+
+\textbf{Limitations:} These technologies are all sensitive to environmental conditions such as lighting, cloud cover, surface moisture, and vegetation. Optical cameras cannot detect mines buried beneath the surface and are limited in cluttered or shaded environments~\cite{cardonalandmine}. Thermal cameras require favorable thermal gradients, and their effectiveness diminishes for deeply buried mines or under conditions that suppress temperature differences~\cite{Kovcs2022LandmineDW}. Hyperspectral and multispectral cameras, while informative, are unable to capture thermal emissions due to their shorter wavelength range.
+
+\textbf{Drone-Based Applications:} UAV-based deployment of optical, thermal, and hyperspectral sensors has been demonstrated extensively for minefield surveying and detection~\cite{dena2020image,7529819,Schutte2001ARCAC,10.1117/12.2177182,Popov2022MethodFM,Desmet2018DronesA,rs15040967,10.1117/12.720442,Baur2021HowTI,baur2020applying,Stankevich2024OpticalAM,AgrawalChung2024ComparingSL,bajic2017developing,10765909,6842242,rs16040677,rs16122046,qiu2023joint,guo2022uav,ptsa-qj43-23,TENORIOTAMAYO2023109443,nikulin2018detection,FORERORAMIREZ2022104307,TENORIOTAMAYO2024105567,krause2018diurnal,Fardoulis2020PROOFHS,butt2024uav}.
+
+\begin{figure}[h!]
+    \centering
+    \begin{subfigure}[b]{0.48\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{figs/Huirui/thermal_camera_drone.png}
+        \caption{Thermal infrared camera mounted on UAV~\cite{nikulin2018detection}.}
+        \label{fig:thermal_camera_drone}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.48\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{figs/Huirui/multispectral_drone.png}
+        \caption{Multispectral camera mounted on UAV~\cite{qiu2023joint}.}
+        \label{fig:optical_camera_drone}
+    \end{subfigure}
+    \caption{Examples of UAV-mounted spectral sensors used in landmine detection.}
+    \label{fig:spectral_camera_drones}
+\end{figure}
+
+
+\paragraph{Mechanical and Vibro-Acoustic Methods}
+
+This class includes detection technologies that exploit the mechanical or vibrational response of buried mines when stimulated by acoustic, seismic, or ultrasonic energy. These methods differ from electromagnetic and radar-based systems by relying on the physical compliance of buried objects rather than their electromagnetic properties~\cite{Gooneratne2004ARO,gichd2006guidebook}.
+
+Acoustic and seismic techniques operate by transmitting low-frequency sound or seismic waves into the ground and measuring the reflected or re-radiated waves using contact or non-contact sensors. Mines are detected based on differences in their vibrational resonance, which contrasts with that of natural materials such as rocks, roots, or metal debris~\cite{gichd2006guidebook}. Similarly, ultrasound-based systems emit high-frequency acoustic waves (above 20 kHz) that reflect off material boundaries with different acoustic impedances. These reflections can be analyzed to image buried structures~\cite{paik2002image,cardonalandmine}.
+
+\textbf{Strengths:} These methods are capable of detecting both metallic and non-metallic mines by exploiting their mechanical compliance~\cite{Gooneratne2004ARO}. They are largely unaffected by soil moisture, mineral content, or surface clutter, and offer a fundamentally different detection principle from electromagnetic methods. Acoustic systems have shown potential for reducing false alarm rates due to their ability to discriminate between man-made and natural subsurface materials~\cite{gichd2006guidebook}.
+
+\textbf{Limitations:} Their effectiveness drops significantly for deeply buried targets or in hard, compacted, or frozen soils where wave propagation and resonance are suppressed. Laser Doppler vibrometers and other remote sensors may struggle in dense vegetation, and surface vibrations are often small and challenging to measure accurately. Ultrasound methods also suffer from strong attenuation at the air-soil interface, limiting their penetration depth and making them less suitable for non-contact UAV deployment~\cite{Gooneratne2004ARO,cardonalandmine}.
+
+\textbf{Drone-Based Applications:} No practical implementations have been reported to date. Research in this area is still at an early conceptual stage, with ground-based systems dominating current development.
+
+\paragraph{Chemical and Biological Sensing Methods}
+
+These techniques target the detection of explosive compounds or their vapors emitted by buried landmines. The methods include chemical vapor sensors, biosensors, and systems utilizing trained animals or genetically engineered microorganisms~\cite{Gooneratne2004ARO,alqudsi2021review}.
+
+Biological methods involve using animals such as dogs, rats, or bees, or genetically modified bacteria that fluoresce in the presence of explosive molecules like TNT. Bacteria-based systems can be sprayed over a suspected minefield and monitored later for fluorescence~\cite{cardonalandmine}. Chemical sensors, by contrast, use materials such as polymer arrays or photoluminescent compounds to detect vapor signatures of explosives~\cite{alqudsi2021review}.
+
+\textbf{Strengths:} These methods can detect mines regardless of casing material, as they directly target the explosive itself~\cite{Gooneratne2004ARO,alqudsi2021review}. They are highly specific when tuned to particular compounds and can be developed into small, low-power devices for drone integration. Biological approaches like bacteria spraying offer wide-area coverage without the need for ground contact~\cite{cardonalandmine}.
+
+\textbf{Limitations:} Environmental conditions such as humidity, temperature, and wind significantly affect vapor transport and detection reliability. Vapor concentrations are often extremely low and may be disturbed by UAV rotor downwash. Some biological methods (e.g., bacteria) are limited to TNT and cannot detect other common explosives like RDX or PETN~\cite{Gooneratne2004ARO,cardonalandmine}. Additionally, deployment logistics and false alarms from other soil contaminants remain concerns.
+
+\textbf{Drone-Based Applications:} No fully developed or fielded systems have yet been reported in practice. Most developments in this area remain at the theoretical level.
