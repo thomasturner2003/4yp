@@ -84,6 +84,9 @@
 \newacronym{tsp}{TSP}{Travelling Salesman Problem}
 \newacronym{tspo}{TSP-O}{Travelling Salesman Problem with Obstacles}
 \newacronym{roi}{ROI}{Region of Interest}
+\newacronym{gis}{GIS}{Geographic Information System}
+\newacronym{qgis}{QGIS}{Quantum Geographic Information System}
+\newacronym{cgal}{CGAL}{Computational Geometry Algorithms Library}
 \newacronym{gpr}{GPR}{Ground Penetrating Radar}
 \newacronym{gpsar}{GPSAR}{Ground Penetrating Synthetic Aperture Radar}
 \newacronym{anfis}{ANFIS}{Adaptive Neuro Fuzzy Inference System}
@@ -92,4 +95,5 @@
 
 % ADD ADDITIONAL PACKAGES HERE
 \usepackage{algpseudocode}
+\usepackage{algorithm}
 \usepackage{hyperref}
