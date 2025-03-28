@@ -32,6 +32,7 @@
         \caption{Required Messages}
         \label{tab:device_comms_requirementsl}
     \end{table}
+    
 \subsubsection{Options}
 \begin{table}[]
         \centering
@@ -65,41 +66,28 @@ Applying the concept of node distribution, \ref{fig:CAN_bus} shows that the redu
  \caption{CAN bus layout}
  \label{fig:CAN_bus}
  \end{figure}
- 
-
 
 \subsubsection{Intra Board Selections}
 \paragraph{\gls{IMU}}
 As \gls{IMU}s provide key data for control and location sensing they should be used at the highest frequency possible. Frequencies greater than the control frequency are beneficial as you can use multiple data points to reduce the effect of white noise. Therefore, the simple but high speed \gls{SPI} protocol should be used. This is also a good option as \gls{SPI} is compatible with almost all modern \gls{IMU}s.
-
 \paragraph{\gls{GNSS}}
 \gls{GNSS} modules can communicate with \gls{UART} or \gls{I$^2$C}, both are simple and effective however, \gls{UART} is compatible with more modules and is therefore chosen.
-
 \paragraph{Flight Controller MicroSD card}
 MicroSD cards can communicate with \gls{SPI} or \gls{SDIO} as native. \gls{SDIO} is the native application and is faster and more effective, however, given the limited data transfer rates required and benefit of using \gls{SPI} over multiple devices and that on the selected \gls{MCU} a \gls{SWD} pin is also required for \gls{SDIO} means that using \gls{SPI} provided more benefit for the flight controller as the data transfer rates are well bellow the \textbf{SPI data limit}.
-
 \paragraph{On Board Computer SD card}
 As the data transfer rates are higher \gls{SDIO} becomes a required option as it can handle \textbf{a shittone of kilobytes} and we need \textbf{a shittone of kilobytes} which is over the \textbf{SPI data limit}.
-
 \paragraph{\gls{LiDAR} Sensors}
 \textbf{NEED specs from Huirui}
-
 \paragraph{Imaging sensors}
 The imaging sensors require high data transfer rates \textbf{quote the one for thermal and for GPR}, this means connecting them via Ethernet to the onboard computer with a maximum threshold of \textbf{Some number} would be most appropriate.
-
 \paragraph{Low Speed Sensors}
 Low speed sensors including any thermometers, barometers do not require high frequency 
 communications, more than 1Hz, as these metrics do not change rapidly. This means that the lowest complexity and cost option, \gls{I$^2$C} should be used.
-
 \paragraph{Debugger}
 Debugging is possible using the \gls{CAN} bus at a system level but for in depth on board debugging that might be required for failure analysis or uploading code to boards should also be available. This can be done using \gls{UART} however, it is slower and has less functionality than using a \gls{SWD}. \gls{SWD} allows for real-time variable inspection and breakpoints. Therefore, for system wide debugging the \gls{CAN} bus will be used, and for onboard debugging a \gls{SWD} will be used.
-
-
-
 
 \subsubsection{High Level Application Protocol}
 \paragraph{Relevance}
 A single high level protocol being used across all components makes the drone more adaptable and makes hiring developers easier. This is because a single skill-set can interact with the entire system. This however, comes with challenges due to the mapping sensors operating on different hardware to the other modules.
-
 \paragraph{Cyphal}
 Cyphal provides the perfect solution for this as it can be used over all major communication hardware. It was originally developed for, and is compatible with, \gls{UAV} components, and has since expanded to include further functionalities including Ethernet and \gls{USB}. This ensures that the system is easier to upgrade.
