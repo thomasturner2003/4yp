@@ -93,7 +93,86 @@
 \newacronym{lwir}{LWIR}{Long Wavelength Infrared}
 \newacronym{cnn}{CNN}{Convolutional Neural Network}
 
+%%% SAM ACRONYMS
+\newacronym{lipo}{LiPo}{lithium polymer}
+\newacronym{liion}{Li-ion}{lithium-ion}
+\newacronym{gbp}{GBP}{Great British Pound}
+\newacronym{resc}{ReSC}{resonant switched capacitor}
+\newacronym{6s}{6s}{6-cell series}
+\newacronym{6s3p}{6s3p}{6-series 3-parallel}
+\newacronym{tim}{TIMs}{thermal interface materials}
+\newacronym{dcdc}{DC-DC}{Direct Current to Direct Current [power converter]
+}
+
+\newacronym{bs}{BS}{British Standards}
+\newacronym{esr}{ESR}{equivalent series resistance}
+\newacronym{i2c}{I\textsuperscript{2}C}{Inter-Integrated Circuit }
+\newacronym{uart}{UART}{Universal Asynchronous Receiver/Transmitter }
+\newacronym{sram}{SRAM}{static random-access memory}
+\newacronym{soc}{SOC}{state of charge}
+\newacronym{ntc}{NTC}{negative-temperature-coefficient}
+\newacronym{ekf}{EKF}{extended Kalman filter}
+\newacronym{fem}{FEM}{finite element method}
+\newacronym{mosfet}{MOSFET}{metal–oxide–semiconductor field-effect transistor}
+\newacronym{cad}{CAD}{computer-aided design}
+\newacronym{pid}{PID}{proportional–integral–derivative}
+\newacronym{dnn}{DNN}{Deep Neural Network}
+\newacronym{lqr}{LQR}{linear-quadratic regulator}
+\newacronym{mpc}{MPC}{model predictive control}
+\newacronym{pd}{PD}{proportional–derivative}
+\newacronym{uav}{UAV}{Unmanned Aerial Vehicle}
+\newacronym{bms}{BMS}{Battery Management System}
+%%%
+
 % ADD ADDITIONAL PACKAGES HERE
 \usepackage{algpseudocode}
 \usepackage{algorithm}
 \usepackage{hyperref}
+
+%STUFF SAM NEEDS
+
+%%%
+\usepackage{fontspec}
+\usepackage{graphicx}
+\usepackage{parskip}
+\usepackage{multicol}
+\usepackage{titlesec}
+\usepackage{setspace}
+\usepackage{amsmath}
+\usepackage{nicematrix}
+\usepackage[margin=20 mm]{geometry}
+\usepackage{fancyhdr}
+\usepackage{amsmath, amssymb, amsfonts, mathtools}
+\usepackage{algorithm, algorithmic}
+\usepackage{hyperref}
+\usepackage{float}
+\usepackage{subcaption}
+\usepackage{array}
+\usepackage{url}
+\usepackage{wrapfig}
+\usepackage{sidecap}
+\usepackage{makecell}
+\usepackage{booktabs}
+\usepackage{import}
+
+\usepackage{tikz}
+
+\usepackage[table]{xcolor}
+\definecolor{swotS}{RGB}{226,237,143}
+\definecolor{swotW}{RGB}{247,193,139}
+\definecolor{swotO}{RGB}{173,208,187}
+\definecolor{swotT}{RGB}{192,165,184}
+\usepackage[raster]{tcolorbox}
+
+\usepackage{siunitx}
+
+
+
+\usepackage{hyperref}
+
+\usepackage{chngcntr}
+
+\usepackage{titlesec}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%
