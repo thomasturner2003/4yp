@@ -176,3 +176,5 @@
 
 
 %%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{tablefootnote}
