@@ -10,18 +10,17 @@ Vias allow for the transference of signals between planes which is often necessa
 
 \subsubsection{Touch Protection}
 \paragraph{\gls{ESD}}
+\gls{ESD} occurs when there is a significant static charge built up in a ground operator or contacting surface that is then shorted in contact with the board. As electro-static voltages can be \cite{REF} this can cause significant damage to devices.
 \paragraph{Protection Devices}
+In order to protect against \gls{ESD} the circuit must provide a low resistance pathway to the ground. This can be using \gls{TVS} diodes that above certain voltages act like a wire that diverts the current flow. They can also be mitigated using voltage dependent resistors that increase resistance with voltage and absorb the errors. Lastly, by using low resistance resistors in series it decreases the current spike. In my designs I make use of both \gls{TVS} diodes and series resistors due to their simplicity and effectiveness.
 \paragraph{Component Placement}
+\gls{ESD} is largely from interactions with people, therefore, efforts to mitigate the effects should be as close to these expected points as possible. This is because the current loop to the ground should be as small as possible in order to minimise the damage to components. Therefore, in my designs \gls{TVS} diodes were placed near all interfaces and removable memory devices as these are the most likely points of contact.
 
 \subsubsection{Component Placement}
 \paragraph{Utility Regions}
-\paragraph{Power Coupling}
+Components with similar functionalities should be kept separate. For example, all digital signals should be kept away from analogue signals as the high frequency digital signals can induce noise in the analogue signals. In my design there are only digital signals and therefore the key areas are between the power management systems, sensors and communications that are all on separate board areas.
 \paragraph{Thermal Considerations}
-
-\subsubsection{Headers and interfaces}
-\paragraph{Placement and accessibility}
-\paragraph{Locking}
-\paragraph{Uniformity}
+Heat dissipating elements, typically diodes and resistors, can cause damage to electronic components if not sufficiently managed. Therefore, heat sinks or controlled airflows are required if there are high power draws. This consideration is why on my devices Buck Converters of above 90\% \cite{REF} are used instead of the less efficient \gls{LDO} which would have an efficiency of 66\% when converting from 5V to 3.3V. This, in addition to the low power draws of all other components, means that no explicit thermal management is needed.
 
 \subsubsection{Trace Widths and Spacing}
 \paragraph{Thermal Management}
