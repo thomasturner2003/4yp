@@ -1,0 +1,23 @@
+\subsection{Emergency Path Planning}
+
+\subsubsection{Objective and Cost Function}
+\paragraph{Objective}
+The key objective is to reduce the downtime and cost of operation of the drone. This means both the cost of damage to the drone through crashing and the difficulty of retrieval need consideration.
+\paragraph{Cost Considerations}
+For this specific usage case, path planning has to consider the probability of failure at all instances along the path. 
+\paragraph{Cost Function}
+Modelling the probability of surviving a traversal across any hexagonal region as constant, p, the cost function of any path of length D is shown in \ref{eq:cost function}.
+\begin{equation}\label{eq:cost function}
+    E(x) 
+    = \sum_{n=1}^{D-1} c_{crashing}\bigl(x_n\bigr)\, (1-p) \,p^n 
+    \;+\; c_{landing}\bigl(x_D\bigr)\, p^D
+\end{equation}
+
+
+\subsubsection{Search Algorithm}
+\paragraph{Algorithm}
+\paragraph{Complexity}
+
+\subsubsection{Flow Algorithm}
+\paragraph{Algorithm}
+\paragraph{Complexity}
