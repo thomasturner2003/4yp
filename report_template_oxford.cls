@@ -178,3 +178,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%
 
 \usepackage{tablefootnote}
+\usepackage{hyperref}
+\usepackage{adjustbox}
+\usepackage{wrapfig}
+\usepackage[table]{xcolor}
+\usepackage{siunitx}
+\usepackage{multirow}
+\usepackage{tablefootnote}
