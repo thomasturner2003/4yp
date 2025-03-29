@@ -1,0 +1,19 @@
+\begin{algorithm}
+    \caption{Smooth}
+    \label{alg:flow}
+\begin{algorithmic}[1]
+    \While{not $Converged$}
+        \State $Converged \gets TRUE$
+        \For{each Node $n$}
+            \For{each \textit{neighbour} in $n.\textit{neighbours}$}
+                \State $\textit{movement\_cost} \gets n.\textit{crashing\_cost} \cdot \frac{1 - p}{2} +  \textit{neighbour}.\textit{crashing\_cost} \cdot \frac{p(1 - p)}{2}$
+                \State $\textit{total\_cost} \gets \textit{movement\_cost} + p \cdot \textit{neighbour.path\_cost}$
+                \If{$\textit{total\_cost} < n.\textit{path\_cost}$}
+                    \State $n.\textit{path\_cost} \gets \textit{total\_cost}$
+                    \State $Converged \gets FALSE$
+                \EndIf
+            \EndFor
+        \EndFor
+    \EndWhile
+\end{algorithmic}
+\end{algorithm}

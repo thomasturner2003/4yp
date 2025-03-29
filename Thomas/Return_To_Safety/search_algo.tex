@@ -1,0 +1,25 @@
+\begin{algorithm}
+\caption{Exhaustive Search}
+\label{alg:search}
+\begin{algorithmic}[1]
+    \For{each Node $n$}
+        \State $\textit{min\_cost} \gets \infty$
+        \State $n.path\_cost$ = \Call{search}{$n$, $p$, $1$, $0$, $depth$, $\textit{min\_cost}$}
+    \EndFor
+    
+    \Function{search}{$n$, $p$, $p\_alive$, $cost$, $depth$, \textbf{ref} $\textit{min\_cost}$}
+        \State $\textit{current\_cost} \gets cost + p\_alive \cdot n.\textit{landing\_cost}$
+        \If{$\textit{current\_cost} < \textit{min\_cost}$}
+            \State $\textit{min\_cost} \gets \textit{current\_cost}$
+        \EndIf
+        \If{$depth = 0$ $\mathbf{or}$ $n.\textit{landing\_cost} = 0$ $\mathbf{or}$ $cost > \textit{min\_cost}$}
+            \State \Return
+        \EndIf
+        \For{each $\textit{neighbour}$ in $n.\textit{neighbours}$}
+            \State $p\_alive\_next \gets p\_alive \cdot p$
+            \State $cost\_next \gets cost + p\_alive \cdot (1 - p) \cdot n.\textit{crashing\_cost}$
+            \State \Call{search}{$\textit{neighbour}$, $p$, $p\_alive\_next$, $cost\_next$, $depth - 1$, $\textit{min\_cost}$}
+        \EndFor
+    \EndFunction
+\end{algorithmic}
+\end{algorithm}
