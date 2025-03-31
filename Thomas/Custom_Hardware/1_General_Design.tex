@@ -23,16 +23,17 @@ Components with similar functionalities should be kept separate. For example, al
 Heat dissipating elements, typically diodes and resistors, can cause damage to electronic components if not sufficiently managed. Therefore, heat sinks or controlled airflows are required if there are high power draws. This consideration is why on my devices Buck Converters of above 90\% \cite{REF} are used instead of the less efficient \gls{LDO} which would have an efficiency of 66\% when converting from 5V to 3.3V. This, in addition to the low power draws of all other components, means that no explicit thermal management is needed.
 
 \subsubsection{Trace Widths and Spacing}
-\paragraph{Thermal Management}
-\paragraph{Impedance Control}
+\paragraph{Impedance Control and Thermal Management}
+The impedance of a trace is proportional to its cross sectional area as it acts like a wire. Since the trace thickness standard as one ounce per square foot it is the cheapest to manufacture with and is used. Therefore, to control the impedance of a trace the width must be calibrated. \textbf{a nice table showing the widths and current capacities}
 \paragraph{Crosstalk}
+When traces are too close too each other they can induce signals in each other. This means that traces should be spaced appropriately. However, since all the signals are digital or physically isolated on the board this is not a major concern but I did ensure that all traces are at least 1.5 trace widths separated as a form of best practice. 
 
 \subsubsection{Layers}
 \paragraph{Two Layers}
+The simplest and most cost effective option in \gls{PCB} design is two copper layers separated by a dielectric. By using a copper filled regions you can create a ground plane and a power plane that effectively distribute charge and maintain voltage integrity. The simplicity of the \gls{GNSS} module means that this is the best and most cost effective option. This comes at the cost of more difficult component placement and a slightly less stable power and ground plane. However, this instability can be mitigated using distributed ceramic capacitors between the planes that filter high frequency noise in voltage levels.
 \paragraph{Four Layers}
+When circuits become more complex, a purpose ground and power plane in between the top and bottom plane can allow for greater packing density of components. They also make the planes more stable as all the path impedances are very low. This means that for complex designs with sensors, like the flight controller module, four layer \gls{PCB}s are the best option.
 \paragraph{Six or more Layers}
+If a circuit contains many high frequency analogue signals it can be beneficial to have separate ground and power planes and indeed extra signal planes to reduce the effects of crosstalk and to maintain stable voltages. However, specific to this use case, this added complexity is not necessary and would act as an extra cost for very limited benefits.
 
-\subsubsection{Component Selection}
-\paragraph{Procurement Cost}
-\paragraph{Mounting}
-\paragraph{Footprint and Volume}
+

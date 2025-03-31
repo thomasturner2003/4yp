@@ -128,7 +128,7 @@
 \usepackage{algpseudocode}
 \usepackage{algorithm}
 \usepackage{hyperref}
-
+\usepackage{listings}
 %STUFF SAM NEEDS
 
 %%%
@@ -176,6 +176,24 @@
 
 
 %%%%%%%%%%%%%%%%%%%%%%%
+
+%Tommy Stuff
+\lstset{
+    basicstyle=\ttfamily\small,
+    frame=tb,
+    numbers=left,
+    numberstyle=\tiny,
+    breaklines=true,
+    postbreak=\mbox{\textcolor{red}{$\hookrightarrow$}\space},
+    showstringspaces=false,
+    tabsize=2
+}
+
+\DeclareCaptionLabelFormat{mycode}{C code snippet}
+\captionsetup[lstlisting]{
+    labelformat=mycode,
+    labelsep=colon
+}
 
 \usepackage{tablefootnote}
 \usepackage{hyperref}

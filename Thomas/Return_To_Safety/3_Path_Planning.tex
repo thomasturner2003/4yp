@@ -6,20 +6,76 @@ The key objective is to reduce the downtime and cost of operation of the drone. 
 \paragraph{Cost Considerations}
 For this specific usage case, path planning has to consider the probability of failure at all instances along the path. 
 \paragraph{Cost Function}
-Modelling the probability of surviving a traversal across any hexagonal region as constant, p, the cost function of any path of length D is shown in \ref{eq:cost function}.
+Modelling the probability of surviving a node to node traversal between adjacent nodes as constant, $p$, the cost function of any path of length $D$ is shown in \ref{eq:cost function}.
 \begin{equation}\label{eq:cost function}
     E(x) 
     = \sum_{n=1}^{D-1} c_{crashing}\bigl(x_n\bigr)\, (1-p) \,p^n 
     \;+\; c_{landing}\bigl(x_D\bigr)\, p^D
 \end{equation}
 
+\subsubsection{Weather induced failure}
+\paragraph{Cause}
+When a gust of wind exceeds the control capabilities of the drone it will cause an extreme disturbance and likely failure resulting in a crash. This is especially important to consider when their is an actuator fault due to the less aggressive control strategies deployed meaning that the maximum rejected gust becomes lower in magnitude and therefore more likely to occur. 
+\paragraph{Gust Modelling}
+Using the \textbf{Meteomatics API} forecast and modelling in \ref{SAM GRACE} the gustiness of the operating environment can be approximated. From this a model, the probability that a gust exceeds the known maximum rejection gust speed for the current control gains per second, $\lambda$, is calculated as shown in \ref{eq:p calc}. The specifics of the calculation of $\lambda$ are an area for future work, however, they would also greatly benefit from the collection of real-time data for the drone in testing.
 
-\subsubsection{Search Algorithm}
-\paragraph{Algorithm}
+\begin{equation}\label{eq:p calc}
+    p = (1-\lambda)^{\frac{nodal\_distance}{speed}}
+\end{equation}
+
+\subsubsection{Search Algorithms}
 \input{Thomas/Return_To_Safety/search_algo}
-\paragraph{Complexity}
-
-\subsubsection{Flow Algorithm}
-\paragraph{Algorithm}
 \input{Thomas/Return_To_Safety/flow_algo}
-\paragraph{Complexity}
+\paragraph{Exhaustive Search}
+The simplest and easiest to understand algorithm is a simple search algorithm as shown in \ref{alg:search}. This recursively calls search until it searches all viable lines. There are steps taken to increase the efficiency, including pruning lines that already exceed the minimum cost as the cost is monotonic increasing and automatically terminating lines when they are above the best terminal state possible. However, the worst case time complexity remains $O(|V|6^{depth})$ which means you cannot get guaranteed results at high depths quickly. The key use case issue is that when \textit{p} is close to 1, optimal paths can be very long and exceed the depth and therefore cause lower accuracies.
+\paragraph{Smoothing}
+To combat the issues with \ref{alg:search}, \ref{alg:flow} was developed. The key idea behind this algorithm is that it smooths out the differences in path cost between neighbouring nodes. This means you get a guaranteed correct answers when the nodes have fully converged. This algorithm is a Bellman-Ford style algorithm and therefore has a time complexity of $O(|E|\times |V|)$ \cite{REF}. In dense graphs this becomes  $O(|V|^3)$ however, we know $|E| \leq |V| \times 6$ as we are using hexagons that can have a maximum of 6 neighbours, therefore the actual complexity is $O(|V|^2)$. 
+
+\paragraph{Optimal Algorithm}
+Matching the complexities and assuming the computation time for each is similar per operation we can derive a complexity matched depth of \ref{eq:complexities}
+\begin{align}\label{eq:complexities}
+    6\times|V|^2 &\approx |V|\times6^{\textit{depth}} \nonumber \\
+    |V| &\approx 6^{\textit{depth} - 1} \label{eq:vertex_depth} \\
+    \textit{depth} &\approx \log_6(|V|) + 1 \nonumber
+\end{align}
+This means that if the below the depth of matching, if the performances are equivalent the search method should be used, if the performance is lower it should not be used.
+\paragraph{Testing}
+Using 10 random satellite images from the Kharkiv region, 10 cost maps were generated including visible obstacles and assumed regions of interest. Then starting at each node of the region of interest 20 seperate trials are run using the search or the smoothing algorithm and their performances are calculated using random failures in line with \textit{p}.
+
+\subsubsection{Real-time application}
+\paragraph{Pre-Compute}
+Carrying out memory and time complex operations on real-time hardware should always be avoided. This is because with real time systems, loops require specific timings for optimal use. Therefore, if we have algorithms that do not operate to precise timings the system can fail or be forced to be less efficient. If all the values are pre-computed and uploaded to the drone with the optimal path the time and memory complexity becomes $O(1)$ which supports precise, timed loops. 
+\paragraph{$p$ ranges}
+While the value of $p$ can take any value between 0 and 1, there can be only 7 outputs for the next best move (going to each of the 6 neighbours or landing). Therefore, instead of creating a specific map for a specific value of $p$ on the Flight Controller you can pre-compute all the ranges of $p$ that would cause each of these outcomes and get the exact same result for the only thing that matters to the drone, which action should be taken next.
+\paragraph{Deployment}
+For a deployed algorithm consistent timings and a minimal memory footprint are essential. This allows for the path planning loop to run at higher speeds as with lower memory requirements faster memory access forms are available and with consistent timings you can maintain consistency in looping speed. To reduce the memory intensity, instead of storing ranges of values you store a sorted array of values going from the smallest $p$ to the greatest. The first time the specific value of $p$ crosses the threshold $p$, you record the required action and if no value crosses the threshold then you default to landing. Finally, to convert row and column indexes instead of the nodes into \gls{GNSS} co-ordinates required for headings you can use a precomputed reference map to ensure reliable access times, or work it out using the scaling factor and a reference co-ordinate to reduce the memory requirements.
+\paragraph{Memory Management}
+The memory on the \gls{MCU}s consists of Flash and \gls{SRAM}. Flash is static memory that has to be pre-loaded onto the board before each run whereas \gls{SRAM} is volatile but has faster access times. Therefore, the optimal strategy is to load the waypoints, maps and gains from the preset values in Flash before a flight into \gls{SRAM}. Furthermore, the Flight Controllers \gls{MCU} contains 2 megabytes of Flash, 64 kilobytes of \gls{ITCM} configured \gls{RAM} 128 kilobytes of \gls{DTCM} configured \gls{RAM} \cite{REF}. These allow for precise timings and should therefore be used for looped processes including control loops and heading calculations. Whereas, for less timing critical actions or varying time operations such as actuator tests the regular \gls{SRAM} can be used. However, for the \gls{GNSS} module \gls{MCU} there is just 128 kilobytes of Flash and 32 kilobytes of \gls{SRAM}.
+\paragraph{Memory Requirement Reduction}
+For maps 256 nodes or smaller instead of using 2 byte floats and 4 byte pointers we use a single array of reduced nodes as shown in \ref{lst:reducednode}. Slightly less precise $p$ values should not cause any major issues and instead of pointers the nodes are accessed with indexes. This is shown in \ref{lst:reducednode} and is 14 bytes per node compared to in \ref{lst:node} which is 40 bytes per node representing 35\% of the initial size.  This smaller size means that for low resolution maps you can get ultra-low memory requirements. A viable strategy may be to have two maps representing the higher and lower zoom levels of the cost map where the lower resolution map (where each node is equal to the worst node within it) is loaded onto the \gls{GNSS} module and the higher resolution map is loaded into the more powerful Flight Controller. For example, for a 1536 node high resolution map it requires 61.44 kilobytes of memory which is possible on the Flight Controller but when reduced to a 256 node low resolution maps it requires 3.584 kilobytes of memory, 5.83\% of the original size. This comes at the cost of lower performance but opens up \gls{RTS} even if the flight controller is not functional. The strategy of setting the low resolution node to the worst value in the high resolution space covered means a more conservative approach in line with the less precise control loop executed away from the Flight Controller. Further non-guaranteed optimal methods are available for further memory reductions,  while there are 7 options available for the next move at each node, usually it is just a threshold value at which you should land and then one viable move after a threshold $p$ value. This node is shown in \ref{lst:ultrareducednode} and contains just 4 bytes, therefore requiring only 1.024 kilobytes for a 256 node map. This can be used in cases of extremely low memory devices.
+\begin{lstlisting}[caption={Node Structure},label={lst:node}]
+struct Node {
+    uint16_t row, col;      // Coordinates
+    float16 p_values[6];    // Probability thresholds
+    Node* actions[6];       // Connected nodes
+};
+\end{lstlisting}
+
+\begin{lstlisting}[caption={Reduced Node Structure},label={lst:reducednode}]
+struct Node {
+    uint8_t row, col;       // Coordinates
+    uint8_t p_values[6];    // Probability thresholds
+    uint8_t actions[6];     // Connected nodes
+};
+\end{lstlisting}
+
+\begin{lstlisting}[caption={Ultra Reduced Node Structure},label={lst:ultrareducednode}]
+struct Node {
+    uint8_t row, col;       // Coordinates
+    uint8_t p_thresh;       // Probability threshold
+    uint8_t next;           // Where to go next
+};
+\end{lstlisting}
+
+\textbf{NEED GRAPH of 3 different memories}
+\textbf{NEED GRAPH of PSEUDO CODE}
