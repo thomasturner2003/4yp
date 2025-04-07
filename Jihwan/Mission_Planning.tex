@@ -94,11 +94,7 @@ The \gls{roi} is an abstract representation of the minefield we wish to survey u
         (c) & (d)
     \end{tabular}
     \caption[Demonstration of \gls{roi} Definition using \gls{qgis}]
-    {Demonstration of defining the \gls{roi} using \gls{qgis}. \\
-    (a) New Shapefile layer is created. \\
-    (b) New polygon feature named "Outer Polygon" is defined. \\
-    (c) The system operator marks the vertices of the polygon. \\
-    (d) The final polygon is displayed. Additional polygons can be added to define the full \gls{roi}.}
+    {Demonstration of defining the \gls{roi} using \gls{qgis}. (a) New Shapefile layer is created. (b) New polygon feature named "Outer Polygon" is defined. (c) The system operator marks the vertices of the polygon. (d) The final polygon is displayed. Additional polygons can be added to define the full \gls{roi}.}
     \label{fig:msp_qgis}
 \end{figure}
 
@@ -198,13 +194,7 @@ Algorithm~\ref{alg:msp_tspo2visgraph}. Figure~\ref{fig:msp_tspo}.
     \centering
     \includegraphics[width=\linewidth]{figs/Jihwan/TSPO Algorithm Visualisation.eps}
     \caption[\gls{tspo} Algorithm Visualisation]
-    {\gls{tspo} algorithm visualisation. \\
-    (a) The example \gls{roi} is defined to have an outer boundary (outer square) with an obstacle (rotated inner square). Assume three suspected landmine points have been found from the Analyse step. \\
-    (b) Add all suspected landmine points and \gls{roi} vertices as nodes to the visibility graph. \\
-    (c) For each node, examine which other nodes are visible (i.e. straight line segment between the two nodes is not obstructed by any obstacles). Grey area indicates the visible region of the lower-left suspected landmine point. \\ 
-    (d) Add weighted edges between visible nodes, with the weight being the Euclidean distance between them. The figure shows all connected edges between all nodes. \\
-    (e) Perform a \gls{tsp} algorithm to visit all suspected landmine points in the visibility graph, starting from and ending at the base station. In this example, the lower left vertex of the outer boundary is defined as the base station. \\
-    (f) Final solution of the minimal traversal path to visit all suspected landmine points is displayed, solving the \gls{tspo} algorithm. 
+    {\gls{tspo} algorithm visualisation. (a) The example \gls{roi} is defined to have an outer boundary (outer square) with an obstacle (rotated inner square). Assume three suspected landmine points have been found from the Analyse step. (b) Add all suspected landmine points and \gls{roi} vertices as nodes to the visibility graph. (c) For each node, examine which other nodes are visible (i.e. straight line segment between the two nodes is not obstructed by any obstacles). Grey area indicates the visible region of the lower-left suspected landmine point. (d) Add weighted edges between visible nodes, with the weight being the Euclidean distance between them. The figure shows all connected edges between all nodes. (e) Perform a \gls{tsp} algorithm to visit all suspected landmine points in the visibility graph, starting from and ending at the base station. In this example, the lower left vertex of the outer boundary is defined as the base station. (f) Final solution of the minimal traversal path to visit all suspected landmine points is displayed, solving the \gls{tspo} algorithm. 
     }
     \label{fig:msp_tspo}
 \end{figure}
@@ -255,6 +245,7 @@ Thus far, the mission planning algorithm has been explored for a single-drone op
 \label{sec:msp_example}
 
 - step by step explanation of the real location example. \ref{fig:msp_example}.
+- Path length: 2490.88 [m], footprint around 9m, around 400mx400m area with 3 obstacles shown. 
 
 \begin{figure}[h]
     \centering
@@ -270,13 +261,7 @@ Thus far, the mission planning algorithm has been explored for a single-drone op
         (e) & (f)
     \end{tabular}
     \caption[Real Location Example for Mission Planning]
-    {Real location example for generating a mission plan for a \gls{roi} in Kyiv, Ukraine. \\
-    (a) \\
-    (b) \\
-    (c) \\
-    (d) \\
-    (e) \\
-    (f) 
+    {Real location example for generating a mission plan for a \gls{roi} in Kyiv, Ukraine. (a) Outer polygon defined (black dotted region) in \gls{qgis}. (b) Obstacles defined (red regions). (c) \gls{cpp} algorithm executed to generate the drone path plan. (d) Generated path plan overlaid on the \gls{roi} for operator to confirm and deploy with the thermal sensor. (e) Example suspected points generated and overlaid on the \gls{roi}. (f) \gls{tspo} algorithm executed to generate the drone path plan and overlaid on the \gls{roi} for operator to confirm and deploy with the \gls{gpr} sensor. 
     }
     \label{fig:msp_example}
 \end{figure}
