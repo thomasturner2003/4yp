@@ -3,12 +3,14 @@
 
 \LoadClass[11pt]{article}
 
-% Inport all packages
+% Inport all packages and acronyms
 \input{preamble}
+\input{glossary}
 
 % Set uni guideline style
 \doublespacing
 \setmainfont{Arial}
+\pagenumbering{roman}
 
 % Intro pages
 \pagestyle{fancy}
@@ -21,34 +23,30 @@
 
 \newcommand{\subtitle}[1]{\def\@subtitle{#1}} 
 
+
 \renewcommand{\maketitle}{
 \begin{titlepage}
+    % Add the background pdf
+    \begin{figure}
+        \centering 
+        \includepdf[pages=-]{figs/Title.pdf}
+    \end{figure}
     \centering
-    \vspace*{1cm}
-
-    \includegraphics[width=0.4\textwidth]{figs/oxford_logo.png}
-
-    \vspace*{1cm}
-
+    \vspace*{3cm}
     \Huge
     \textbf{\@title}
 
-    \vspace{0.5cm}
-    \LARGE
-    \@subtitle
-
-    \vfill
-
-    \vspace{1.5cm}
-
-    \textbf{\@author}
-
+    \vspace{2.5cm}
     \Large
+    \textbf{\@author}
+    
     \@date
-
+    \vfill
     \thispagestyle{empty} % Suppress page number on the title page
 \end{titlepage}
 }
+
+
 
 \newcommand{\printbibliography}[2]{
 \begingroup\onehalfspacing
