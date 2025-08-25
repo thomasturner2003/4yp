@@ -3,35 +3,20 @@
 
 \LoadClass[11pt]{article}
 
-% GUIDELINES
-% - Submit by noon on Wednesday of the fourth week of Trinity Term
-% - Plagiarism! The University regards plagiarism in examinations as a serious matter. Cases will be investigated and penalties may range from deduction of marks to expulsion from the University, depending on the seriousness of the occurrence. Even if plagiarism is inadvertent, it can result in a penalty.
-% - 30 pages per student
-% - 20 mm margins
-% - Arial (or similar) font size 11
-% - Double line spacing
+% Inport all packages
+\input{preamble}
 
-\usepackage[margin=20 mm]{geometry}
-\usepackage{fontspec}
-\usepackage{setspace}
+% Set uni guideline style
 \doublespacing
 \setmainfont{Arial}
 
-\usepackage{lipsum}
-
-\usepackage{graphicx}
-\usepackage{subcaption}
-\usepackage{duckuments}
-
-\usepackage{booktabs}
-
-\usepackage{fancyhdr}
+% Intro pages
 \pagestyle{fancy}
 \fancyhead[L]{} % Left side of the header
 \fancyhead[C]{} % Center of the header (optional)
 \fancyhead[R]{} % Right side of the header (optional)
 
-\usepackage{glossaries}
+
 \makeglossaries
 
 \newcommand{\subtitle}[1]{\def\@subtitle{#1}} 
@@ -64,9 +49,6 @@
     \thispagestyle{empty} % Suppress page number on the title page
 \end{titlepage}
 }
-
-\usepackage{setspace}
-\usepackage{multicol}
 
 \newcommand{\printbibliography}[2]{
 \begingroup\onehalfspacing
