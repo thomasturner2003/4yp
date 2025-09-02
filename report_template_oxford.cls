@@ -52,7 +52,7 @@
 \begingroup\onehalfspacing
 {\small
 \begin{multicols}{2}
-\bibliographystyle{plain}
+\bibliographystyle{IEEEtran}
 \bibliography{#1}
 \end{multicols}}
 \endgroup
